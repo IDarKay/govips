@@ -2,6 +2,7 @@ package vips
 
 // #include "conversion.h"
 import "C"
+import "unsafe"
 
 // BandFormat represents VIPS_FORMAT type
 type BandFormat int
@@ -461,4 +462,15 @@ func vipsGrid(in *C.VipsImage, tileHeight, across, down int) (*C.VipsImage, erro
 		return nil, handleImageError(out)
 	}
 	return out, nil
+}
+
+func vipsDZSave(in *C.VipsImage, filename string) error {
+	var name *C.char = C.CString(filename)
+	defer C.free(unsafe.Pointer(name))
+
+	if err := C.vipsimage_dzsave(in, name); err != 0 {
+		return err
+	}
+
+	return nil
 }

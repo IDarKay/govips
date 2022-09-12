@@ -1809,6 +1809,7 @@ func clearImage(ref *C.VipsImage) {
 type Coding int
 
 // Coding enum
+//
 //goland:noinspection GoUnusedConst
 const (
 	CodingError Coding = C.VIPS_CODING_ERROR
@@ -1848,4 +1849,9 @@ func Pixelate(imageRef *ImageRef, factor float64) (err error) {
 	}
 
 	return
+}
+
+func (r *ImageRef) DzSave(filename string) error {
+	err := vipsDZSave(r.image, filename)
+	return err
 }

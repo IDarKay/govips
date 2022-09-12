@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/davidbyttow/govips/v2/vips"
+	"github.com/idarkay/govips/vips"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
