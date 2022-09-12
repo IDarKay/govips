@@ -469,7 +469,7 @@ func vipsDZSave(in *C.VipsImage, filename string) error {
 	defer C.free(unsafe.Pointer(name))
 
 	if err := C.vipsimage_dzsave(in, name); err != 0 {
-		return err
+		return handleImageError(in)
 	}
 
 	return nil
