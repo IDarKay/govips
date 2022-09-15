@@ -375,7 +375,7 @@ int set_jp2ksave_options(VipsOperation *operation, SaveParams *params) {
 
 VipsImage* load_from_openslide(const char *filename) {
   VipsImage* out = NULL;
-  return vips_openslideload(filename, &out);
+  vips_openslideload(filename, &out, NULL);
   return out;
 }
 
