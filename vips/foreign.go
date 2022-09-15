@@ -244,12 +244,18 @@ func isBMP(buf []byte) bool {
 	return bytes.HasPrefix(buf, bmpHeader)
 }
 
-//X'0000 000C 6A50 2020 0D0A 870A'
+// X'0000 000C 6A50 2020 0D0A 870A'
 var jp2kHeader = []byte("\x00\x00\x00\x0C\x6A\x50\x20\x20\x0D\x0A\x87\x0A")
 
 // https://datatracker.ietf.org/doc/html/rfc3745
 func isJP2K(buf []byte) bool {
 	return bytes.HasPrefix(buf, jp2kHeader)
+}
+
+func vipsLoadFromOpenSlide(file string) (*C.VipsImage, error) {
+	fname := C.CString(file)
+	defer C.free(unsafe.Pointer(fname))
+	return C.load_from_openslide(fname), nil
 }
 
 func vipsLoadFromBuffer(buf []byte, params *ImportParams) (*C.VipsImage, ImageType, ImageType, error) {

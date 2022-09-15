@@ -400,6 +400,17 @@ func LoadImageFromFile(file string, params *ImportParams) (*ImageRef, error) {
 	return LoadImageFromBuffer(buf, params)
 }
 
+func LoadOpenSlideFromFile(file string) (*ImageRef, error) {
+	startupIfNeeded()
+	vipsImage, err := vipsLoadFromOpenSlide(file)
+	if err != nil {
+		return nil, err
+	}
+	ref := newImageRef(vipsImage, ImageTypeUnknown, ImageTypeUnknown, []byte{})
+	govipsLog("govips", LogLevelDebug, fmt.Sprintf("created imageRef %p", ref))
+	return ref, nil
+}
+
 // NewImageFromBuffer loads an image buffer and creates a new Image
 func NewImageFromBuffer(buf []byte) (*ImageRef, error) {
 	return LoadImageFromBuffer(buf, nil)

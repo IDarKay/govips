@@ -373,6 +373,12 @@ int set_jp2ksave_options(VipsOperation *operation, SaveParams *params) {
   return ret;
 }
 
+VipsImage* load_from_openslide(const char *filename) {
+  VipsImage* out = NULL;
+  return vips_openslideload(filename, &out);
+  return out;
+}
+
 int load_from_buffer(LoadParams *params, void *buf, size_t len) {
   switch (params->inputFormat) {
     case JPEG:

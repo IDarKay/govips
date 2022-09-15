@@ -70,7 +70,7 @@ typedef struct LoadParams {
 
 LoadParams create_load_params(ImageType inputFormat);
 int load_from_buffer(LoadParams *params, void *buf, size_t len);
-
+VipsImage* load_from_openslide(const char *filename);
 typedef struct SaveParams {
   VipsImage *inputImage;
   void *outputBuffer;
